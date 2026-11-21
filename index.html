@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mijn verlanglijstje</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎁</text></svg>">
+<style>
+:root{
+  --bg:#12233a; --text:#f3f6fa; --muted:#a9b8cc;
+  --tag:#f6efe2; --tag-text:#1c2a3d; --link:#b3253a;
+}
+@media (prefers-color-scheme: light){
+  :root{--bg:#eaf0f7; --text:#14233a; --muted:#52627a; --tag:#fff; --tag-text:#14233a}
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:17px/1.55 Georgia,"Iowan Old Style",serif}
+.wrap{max-width:860px;margin:0 auto;padding:56px 20px 80px}
+h1{font-size:clamp(2.4rem,8vw,4.4rem);line-height:1.02;margin:0 0 14px;letter-spacing:-.02em;font-weight:700}
+.intro{color:var(--muted);max-width:52ch;margin:0 0 36px;font-size:1.05rem}
+ul{list-style:none;margin:0;padding:0;display:grid;gap:18px}
+li.gift{position:relative;background:var(--tag);color:var(--tag-text);border-radius:6px 22px 22px 6px;padding:20px 22px 18px 64px;box-shadow:0 2px 0 rgba(0,0,0,.25)}
+li.gift::before{content:"";position:absolute;left:20px;top:50%;width:18px;height:18px;margin-top:-9px;border-radius:50%;background:var(--bg);box-shadow:inset 0 1px 3px rgba(0,0,0,.5)}
+li.gift::after{content:"";position:absolute;left:29px;top:0;bottom:0;border-left:2px dashed rgba(0,0,0,.12)}
+li.gift h2{font-size:1.25rem;margin:0 0 4px;line-height:1.25}
+li.gift p{margin:0;font-size:.97rem;opacity:.85}
+li.gift a{display:inline-block;margin-top:10px;font-family:system-ui,sans-serif;font-size:.88rem;font-weight:600;color:var(--link)}
+a:focus-visible{outline:3px solid #ffd166;outline-offset:2px}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <h1 id="titel"></h1>
+  <p class="intro" id="intro"></p>
+  <ul id="lijst"></ul>
+</main>
+
+<script>
+/* ====== PAS HIER JE LIJSTJE AAN ====== */
+const TITEL = "Mijn verlanglijstje";
+const INTRO = "Fijne feestdagen! Hieronder staat wat ik graag zou krijgen. Alles is een idee, geen verplichting.";
+
+const CADEAUS = [
+  { naam: "Balaclava", info: "Voor tijdens het fietsen.", link: "" },
+  { naam: "Funko Pop", info: "Van Marvel.", link: "" }
+];
+/* ====================================== */
+
+document.title = TITEL;
+document.getElementById("titel").textContent = TITEL;
+document.getElementById("intro").textContent = INTRO;
+
+const ul = document.getElementById("lijst");
+CADEAUS.forEach(c => {
+  const li = document.createElement("li");
+  li.className = "gift";
+  const h = document.createElement("h2"); h.textContent = c.naam;
+  li.appendChild(h);
+  if (c.info) { const p = document.createElement("p"); p.textContent = c.info; li.appendChild(p); }
+  if (c.link) {
+    const a = document.createElement("a");
+    a.href = c.link; a.target = "_blank"; a.rel = "noopener"; a.textContent = "Bekijk in de winkel";
+    li.appendChild(a);
+  }
+  ul.appendChild(li);
+});
+</script>
+</body>
+</html>
